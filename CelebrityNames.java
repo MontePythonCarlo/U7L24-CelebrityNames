@@ -1,43 +1,23 @@
-import java.io.*;
-import java.util.*;
-
 /**
- * Write a description of class CelebrityNames here.
- * 
- * @author Roger Jaffe
- * @version 2015-01-19
+ * @author (Nick Patrick and Brandon Cooper) 
+ * @version (a version number or a date)
  */
-public class CelebrityNames
-{
-    public static final String FILE_NAME = "CelebrityData.txt";
-    public static void main(String args[]) throws IOException
-    { 
-        Scanner sf = new Scanner(new File(FILE_NAME));
-
-        int maxIndx = -1; //-1 so when we increment below, the first index is 0
-        String text[] = new String[1000]; //to be safe, declare more than we need
-
-        while(sf.hasNext( ))
-        { 
-            maxIndx++;
-            text[maxIndx] = sf.nextLine( ); 
-        } 
-        //maxIndx is now the highest index of text[], = -1 if no text lines 
-        sf.close( ); //We opened a file above, so close it when finished.
-
-        String reversedName[] = new String[maxIndx + 1];
-        for (int j = 0; j <= maxIndx; j++)
-        { 
-            Scanner sc = new Scanner( text[j] );
-            String firstName = sc.next( );
-            String lastName = sc.next( );
-            reversedName[j] = lastName + ", " + firstName;
-        } 
-        
-        Arrays.sort(reversedName);
-        for (int j =0; j <= maxIndx; j++)
-        { 
-            System.out.println(reversedName[j]);
-        } 
+import java.util.Random;
+public class MonteCarlo {
+    public double  h,k,r;
+    private  Random rndm = new Random();
+    public MonteCarlo(double h,double k,double r){
+        this.h=h;
+        this.k=k;
+        this.r=r;
+    }
+    public double nextRainDrop_x(){
+        return (rndm.nextDouble()*2*r)+(h-r);
+    }
+    public double nextRainDrop_y(){
+        return (rndm.nextDouble()*2*r)+(k-r);
+    }
+    public boolean insideCirle(double x , double y){
+        return Math.pow((x-h), 2)+Math.pow((y-k), 2)<=Math.pow(r,2);
     }
 }
